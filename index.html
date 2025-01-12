@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comparison Result</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .button-group button {
+      padding: 10px 15px;
+      font-size: 14px;
+      border: none;
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .button-group button:hover {
+      background-color: #0056b3;
+    }
+    .comparison-container {
+      display: flex;
+      gap: 20px;
+    }
+    .content-box {
+      width: 50%;
+      background: #f9f9f9;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      overflow-y: auto;
+      height: 400px;
+    }
+    .line {
+      display: flex;
+      gap: 10px;
+    }
+    .line-number {
+      width: 30px;
+      text-align: right;
+      color: #888;
+    }
+    .highlight {
+      background-color: #ffe6e6;
+      color: #d9534f;
+    }
+    .error-list {
+      margin-top: 20px;
+    }
+    .error-item {
+      margin-bottom: 10px;
+    }
+    .error-line {
+      cursor: pointer;
+      color: #007bff;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Comparison Result</h1>
+    <div class="button-group">
+      <button onclick="resetPage()">New</button>
+      <button onclick="editDiff()">New Diff</button>
+    </div>
+    <div class="comparison-container">
+      <div class="content-box" id="leftContent"></div>
+      <div class="content-box" id="rightContent"></div>
+    </div>
+    <div class="error-list" id="errorList"></div>
+  </div>
+  <script>
+    // Retrieve data from session storage
+    const content1 = sessionStorage.getItem('content1') || '';
+    const content2 = sessionStorage.getItem('content2') || '';
+
+    // Elements
+    const leftContent = document.getElementById('leftContent');
+    const rightContent = document.getElementById('rightContent');
+    const errorList = document.getElementById('errorList');
+
+    // Split content by lines
+    const lines1 = content1.split('\n');
+    const lines2 = content2.split('\n');
+    const maxLines = Math.max(lines1.length, lines2.length);
+
+    // Compare and render
+    let errors = [];
+    for (let i = 0; i < maxLines; i++) {
+      const line1 = lines1[i] || '';
+      const line2 = lines2[i] || '';
+
+      // Highlight differences
+      const leftLine = line1 === line2 ? line1 : `<span class="highlight">${line1}</span>`;
+      const rightLine = line1 === line2 ? line2 : `<span class="highlight">${line2}</span>`;
+
+      // Append lines with numbers
+      leftContent.innerHTML += `<div class="line"><span class="line-number">${i + 1}</span><pre>${leftLine}</pre></div>`;
+      rightContent.innerHTML += `<div class="line"><span class="line-number">${i + 1}</span><pre>${rightLine}</pre></div>`;
+
+      // Log errors
+      if (line1 !== line2) {
+        errors.push({ line: i + 1, content1: line1, content2: line2 });
+      }
+    }
+
+    // Display error list
+    if (errors.length > 0) {
+      errorList.innerHTML = '<h3>Differences Found:</h3>';
+      errors.forEach(error => {
+        errorList.innerHTML += `
+          <div class="error-item">
+            Line ${error.line}: 
+            <span class="error-line" onclick="scrollToLine(${error.line})">View Difference</span>
+          </div>
+        `;
+      });
+    } else {
+      errorList.innerHTML = '<h3>No Differences Found</h3>';
+    }
+
+    // Scroll to line function
+    function scrollToLine(line) {
+      const leftLines = document.querySelectorAll('#leftContent .line');
+      const rightLines = document.querySelectorAll('#rightContent .line');
+      if (leftLines[line - 1] && rightLines[line - 1]) {
+        leftLines[line - 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        rightLines[line - 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+    function editDiff() {
+    // Redirect back to index.html without clearing sessionStorage
+    window.location.href = 'index.html';
+  }
+  function resetPage() {
+    // Clear sessionStorage or any saved data
+    sessionStorage.removeItem('content1');
+    sessionStorage.removeItem('content2');
+
+    // Redirect back to index.html for users to input new JSON data
+    window.location.href = 'index.html';
+  }
+  </script>
+</body>
+</html>
