@@ -72,8 +72,34 @@
             justify-content: space-between;
             align-items: center;
             background: #444;
-            padding: 8px;
+            padding: 10px;
+            /* color: white; */
+            border-radius: 6px;
+        }
+        .header span {
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+        }
+        .header select, .header button {
+            padding: 8px 12px;
+            border: none;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            /* margin-left: 1000px; */
+        }
+        .header select {
+            background: #333;
             color: white;
+        }
+        .header button {
+            background: #0056b3;
+            color: white;
+        }
+        .header button:hover {
+            background: #0056b3;
         }
         .diff-actions {
             display: flex;
@@ -83,16 +109,17 @@
         }
         .diff-actions button {
             padding: 10px 20px;
-            background-color: #007bff;
+            /* background-color: #007bff; */
+            background-color: #0056b3;
             border: none;
             color: white;
             font-size: 16px;
             cursor: pointer;
             border-radius: 5px;
         }
-        .diff-actions button:hover {
+        /* .diff-actions button:hover {
             background-color: #0056b3;
-        }
+        } */
         /* Fullscreen Mode */
         .fullscreen {
             position: fixed;
@@ -110,6 +137,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-top: 15px;
             margin-bottom: 40px;
             padding: 10px 0;
             border-bottom: 1px solid #ddd;
@@ -134,13 +162,15 @@
         <div class="editor-container" id="leftEditorSection">
             <div class="header">
                 <span>Left Editor</span>
-                <select onclick="handleFormat(editorLeft, this.value,blnOwn=true)">
-                    <option value="format">Format JSON</option>
-                    <option value="minify">Minify JSON</option>
-                </select>
-                <button id="cleareditor1" onclick="clearEditor(editorLeft)">❌ Cleare</button>
-                <button onclick="copyText(editorLeft)">📋 Copy</button>
-                <button onclick="toggleFullScreen('leftEditorSection')">🔳 Fullscreen</button>
+                <div>
+                    <select onclick="handleFormat(editorLeft, this.value,blnOwn=true)">
+                        <option value="format">Format JSON</option>
+                        <option value="minify">Minify JSON</option>
+                    </select>
+                    <button id="cleareditor1" onclick="clearEditor(editorLeft)">Cleare</button>
+                    <button onclick="copyText(editorLeft)">Copy</button>
+                    <button onclick="toggleFullScreen('leftEditorSection')">Fullscreen</button>
+                </div>
             </div>
             <textarea id="editorLeft"></textarea>
         </div>
@@ -155,13 +185,15 @@
         <div class="editor-container" id="rightEditorSection">
             <div class="header">
                 <span>Right Editor</span>
-                <select onclick="handleFormat(editorRight, this.value,blnOwn=true)">
-                    <option value="format">Format JSON</option>
-                    <option value="minify">Minify JSON</option>
-                </select>
-                <button id="cleareditor1" onclick="clearEditor(editorRight)">❌Cleare</button>
-                <button onclick="copyText(editorRight)">📋 Copy</button>
-                <button onclick="toggleFullScreen('rightEditorSection')">🔳 Fullscreen</button>
+                <div>
+                    <select onclick="handleFormat(editorRight, this.value,blnOwn=true)">
+                        <option value="format">Format JSON</option>
+                        <option value="minify">Minify JSON</option>
+                    </select>
+                    <button id="cleareditor1" onclick="clearEditor(editorRight)">Cleare</button>
+                    <button onclick="copyText(editorRight)">Copy</button>
+                    <button onclick="toggleFullScreen('rightEditorSection')">Fullscreen</button>
+                </div>
             </div>
             <textarea id="editorRight"></textarea>
         </div>
