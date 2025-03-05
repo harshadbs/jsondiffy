@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeMirror JSON Folding</title>
+    <meta property="og:title" content="JSONDiffy - Compare JSON Data Instantly">
+    <meta property="og:description" content="Quickly compare and analyze JSON data with JSONDiffy. Find differences, visualize changes, and debug structured data with ease.">
+    <meta property="og:url" content="https://www.jsondiffy.com/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="JSONDiffy - Compare JSON Data Instantly">
+    <meta name="twitter:description" content="JSONDiffy makes JSON comparison seamless. Detect differences, format data, and debug efficiently.">
+
+    <title>JSONDiffy - Advanced JSON Comparison Tool</title>
+    <meta name="description" content="Compare JSON data easily with JSONDiffy. Instantly detect differences, format, and analyze structured data with a user-friendly interface. Try it now!">   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/codemirror.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/theme/material-darker.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/addon/fold/foldgutter.min.css">
@@ -15,7 +23,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/addon/fold/foldgutter.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/addon/fold/brace-fold.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/addon/fold/comment-fold.min.js"></script>
-    
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "JSONDiffy",
+          "url": "https://www.jsondiffy.com",
+          "description": "Easily compare JSON files and detect differences. JSONDiffy provides an accurate and efficient JSON comparison tool for developers.",
+          "applicationCategory": "DeveloperTool",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        }
+        </script>
+        
     <style>
         * {
             box-sizing: border-box;
@@ -46,11 +69,11 @@
         }
         .header {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            background: #333;
+            align-items: center;
+            background: #444;
+            padding: 8px;
             color: white;
-            padding: 10px;
         }
         .diff-actions {
             display: flex;
@@ -70,14 +93,6 @@
         .diff-actions button:hover {
             background-color: #0056b3;
         }
-        /* .differences-panel {
-            width: 100%;
-            background: #222;
-            padding: 15px;
-            margin-top: 10px;
-            border-radius: 5px;
-            min-height: 100px;
-        } */
         /* Fullscreen Mode */
         .fullscreen {
             position: fixed;
@@ -91,43 +106,27 @@
         .errorHighlight {
             background-color: rgba(255, 0, 0, 0.3); /* Light red */
         }
-        .header {
+        .mainHeader {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
             padding: 10px 0;
             border-bottom: 1px solid #ddd;
         }
-
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
         .logo {
             font-size: 24px;
             font-weight: bold;
-            color: #007bff;
-        }
-
-        .subtitle {
-            color: #666;
-            font-size: 14px;
+            color: #c5c8cc;
         }
     </style>
 </head>
 <body>
 
-    <header class="header">
+    <header class="mainHeader">
         <div class="logo-section">
-            <div class="logo">JSON DIFFY</div>
-            <div class="subtitle">Advanced JSON Comparison for Precise Data Insights</div>
-            <p class="subtitle">Effortlessly compare two JSON documents with our advanced comparison tool. Identify differences at every level, including structural changes, missing or added keys, and modified values. Our intelligent algorithm not only highlights discrepancies but also provides a detailed breakdown for seamless analysis. Whether you're debugging APIs, validating data, or merging configurations, our tool ensures accuracy and efficiency. Experience a smarter way to compare JSON with intuitive, user-friendly visualization and deep-level insights.</p>
-        </div>
-        <div class="button-group">
-            <!-- <button id="clearBtn" onclick="clearEditor(editorRight,blnAll=true)">❌ Cleare</button> -->
+            <h1 class="logo">JSONDiffy - The Best JSON Comparison Tool</h1>
+            <br>
         </div>
     </header>
     <div class="body-container">        
