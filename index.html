@@ -135,13 +135,13 @@
         <div class="editor-container" id="leftEditorSection">
             <div class="header">
                 <span>Left Editor</span>
-                <button id="cleareditor1" onclick="clearEditor(editorLeft)">❌ Cleare</button>
-                <button onclick="copyText(editorLeft)">📋 Copy</button>
-                <button onclick="toggleFullScreen('leftEditorSection')">🔳 Fullscreen</button>
                 <select onclick="handleFormat(editorLeft, this.value,blnOwn=true)">
                     <option value="format">Format JSON</option>
                     <option value="minify">Minify JSON</option>
                 </select>
+                <button id="cleareditor1" onclick="clearEditor(editorLeft)">❌ Cleare</button>
+                <button onclick="copyText(editorLeft)">📋 Copy</button>
+                <button onclick="toggleFullScreen('leftEditorSection')">🔳 Fullscreen</button>
             </div>
             <textarea id="editorLeft"></textarea>
         </div>
@@ -156,13 +156,13 @@
         <div class="editor-container" id="rightEditorSection">
             <div class="header">
                 <span>Right Editor</span>
-                <button id="cleareditor1" onclick="clearEditor(editorRight)">❌Cleare</button>
-                <button onclick="copyText(editorRight)">📋 Copy</button>
-                <button onclick="toggleFullScreen('rightEditorSection')">🔳 Fullscreen</button>
                 <select onclick="handleFormat(editorRight, this.value,blnOwn=true)">
                     <option value="format">Format JSON</option>
                     <option value="minify">Minify JSON</option>
                 </select>
+                <button id="cleareditor1" onclick="clearEditor(editorRight)">❌Cleare</button>
+                <button onclick="copyText(editorRight)">📋 Copy</button>
+                <button onclick="toggleFullScreen('rightEditorSection')">🔳 Fullscreen</button>
             </div>
             <textarea id="editorRight"></textarea>
         </div>
