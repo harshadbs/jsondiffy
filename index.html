@@ -39,115 +39,7 @@
         }
         </script>
         
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background-color: #282c34;
-            color: #e8e8e8;
-        }
-        .body-container {
-            display: flex;
-            /* flex-wrap: wrap; */
-            gap: 10px;
-            justify-content: center;
-            /* align-items: flex-start; */
-            padding: 20px;
-        }
-        .editor-container {
-            width: 45%;
-            height: 700px;
-            border: 1px solid #444;
-            position: relative;
-        }
-        .CodeMirror {
-            height: 100%;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #444;
-            padding: 10px;
-            /* color: white; */
-            border-radius: 6px;
-        }
-        .header span {
-            font-size: 16px;
-            font-weight: bold;
-            color: #fff;
-        }
-        .header select, .header button {
-            padding: 8px 12px;
-            border: none;
-            font-size: 14px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s ease;
-            /* margin-left: 1000px; */
-        }
-        .header select {
-            background: #333;
-            color: white;
-        }
-        .header button {
-            background: #0056b3;
-            color: white;
-        }
-        .header button:hover {
-            background: #0056b3;
-        }
-        .diff-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            justify-content: center;
-        }
-        .diff-actions button {
-            padding: 10px 20px;
-            /* background-color: #007bff; */
-            background-color: #0056b3;
-            border: none;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        /* .diff-actions button:hover {
-            background-color: #0056b3;
-        } */
-        /* Fullscreen Mode */
-        .fullscreen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 9999;
-            background: #000;
-        }
-        .errorHighlight {
-            background-color: rgba(255, 0, 0, 0.3); /* Light red */
-        }
-        .mainHeader {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 15px;
-            margin-bottom: 40px;
-            padding: 10px 0;
-            border-bottom: 1px solid #ddd;
-        }
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #c5c8cc;
-        }
-    </style>
+        <style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;background-color:#282c34;color:#e8e8e8}.body-container{display:flex;gap:10px;justify-content:center;padding:20px}.editor-container{width:45%;height:640px;border:1px solid #444;position:relative}.CodeMirror{height:100%;font-size:15px}.header{display:flex;justify-content:space-between;align-items:center;background:#444;padding:10px;border-radius:6px}.header span{font-size:16px;font-weight:700;color:#fff}.header select,.header button{padding:8px 12px;border:none;font-size:14px;border-radius:5px;cursor:pointer;transition:0.3s ease}.header select{background:#333;color:#fff}.header button{background:#0056b3;color:#fff}.header button:hover{background:#0056b3}.diff-actions{display:flex;flex-direction:column;gap:1rem;justify-content:center}.diff-actions button{padding:10px 20px;background-color:#0056b3;border:none;color:#fff;font-size:16px;cursor:pointer;border-radius:5px}.fullscreen{position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;background:#000}.errorHighlight{background-color:rgb(255 0 0 / .3)}.mainHeader{display:flex;justify-content:space-between;align-items:center;margin-top:15px;margin-bottom:40px;padding:10px 0;border-bottom:1px solid #ddd}.logo{font-size:24px;font-weight:700;color:#c5c8cc}</style>
 </head>
 <body>
 
@@ -168,7 +60,8 @@
                         <option value="minify">Minify JSON</option>
                     </select>
                     <button id="cleareditor1" onclick="clearEditor(editorLeft)">Cleare</button>
-                    <button onclick="copyText(editorLeft)">Copy</button>
+                    <!-- <button onclick="copyText(editorLeft)">Copy</button> -->
+                    <button onclick="copyText(editorLeft, this)">Copy</button>
                     <button onclick="toggleFullScreen('leftEditorSection')">Fullscreen</button>
                 </div>
             </div>
@@ -191,7 +84,8 @@
                         <option value="minify">Minify JSON</option>
                     </select>
                     <button id="cleareditor1" onclick="clearEditor(editorRight)">Cleare</button>
-                    <button onclick="copyText(editorRight)">Copy</button>
+                    <!-- <button onclick="copyText(editorRight)">Copy</button> -->
+                    <button onclick="copyText(editorRight, this)">Copy</button>
                     <button onclick="toggleFullScreen('rightEditorSection')">Fullscreen</button>
                 </div>
             </div>
@@ -205,169 +99,20 @@
     </div>
 
 
-    <script>
-        // Common CodeMirror Configuration
-        const commonConfig = {
-            lineNumbers: true,
-            mode: { name: 'javascript', json: true }, // Ensures JSON mode
-            theme: 'material-darker',
-            matchBrackets: true,
-            autoCloseBrackets: true,
-            foldGutter: true, // Enables folding
-            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"] // Adds folding gutter
-        };
-
-        // Initialize Editors
-        const editorLeft = CodeMirror.fromTextArea(document.getElementById('editorLeft'), commonConfig);
-        const editorRight = CodeMirror.fromTextArea(document.getElementById('editorRight'), commonConfig);
-
-
-        // Set Default JSON for Testing
-        const defaultLeftJSON = {
-            project: "JSON Diff Tool",
-            features: ["Auto Detect", "Collapsible JSON"]
-        };
-        const defaultRightJSON = {
-            project: "JSON Diff Tool",
-            features: ["Auto Detect", "Collapsible JSON"]
-        };
-
-        editorLeft.setValue(JSON.stringify(defaultLeftJSON, null, 2));
-        editorRight.setValue(JSON.stringify(defaultRightJSON, null, 2));
-
-        editorLeft.refresh();
-        editorRight.refresh();
-
-        // swapEditors function
-        function swapJSON() {
-            const value1 = editorLeft.getValue();
-            const value2 = editorRight.getValue();
-            editorLeft.setValue(value2);
-            editorRight.setValue(value1);
-        };
-
-        /**
-         * cleare function
-         * 
-         * */
-        function clearEditor(editorInstance,blnAll = false) {
-            if (blnAll){
-                editorLeft.setValue('');
-                editorRight.setValue('');
-
-            clearHighlights();
-            } else {
-                editorInstance.setValue('');
-            }
-            document.getElementById('diffList').innerHTML = '';
-        }
-
-
-        /**
-         * copy function
-         * 
-         * */
-         function copyText(editorInstance) {
-            let text = editorInstance.getValue(); // Get only the actual content
-            text = text.replace(/[\u200B-\u200D\uFEFF]/g, ''); // Remove any invisible characters
-
-            // Copy text to clipboard using Clipboard API
-            navigator.clipboard.writeText(text).then(() => {
-                console.log("Copied successfully!");
-            }).catch(err => {
-                console.error("Failed to copy:", err);
-            });
-        }
-        // Fullscreen Toggle
-        function toggleFullScreen(editorId) {
-            var element = document.getElementById(editorId);
-            element.classList.toggle("fullscreen");
-        }
-
-        // Compare Button Functionality (Placeholder)
-        function compareJSONFunction() {
-            let leftJSON, rightJSON, leftLines, rightLines;
-            try {
-            handleFormat(editorLeft, 'format')
-            handleFormat(editorRight, 'format')
-
-                leftLines = editorLeft.getValue().split("\n");
-                rightLines = editorRight.getValue().split("\n");
-                
-                leftJSON = JSON.parse(editorLeft.getValue());
-                rightJSON = JSON.parse(editorRight.getValue());
-            } catch (e) {
-                let editorName = e.lineNumber === 268 ? "Left Editor" : e.lineNumber === 269 ? "Right Editor" : "Unknown Editor";
-                const match = e.message.match(/line (\d+)/);
-                const line = match ? `Line: ${match[1]}` : "Unknown line";
-                document.getElementById("errors").innerHTML += `<p style="color: red;">${editorName} - ${line} - ${e.message.split(':')[0]}</p>`;
-                return;
-            }
-            compareJSON(leftLines, rightLines);
-        };
-
-        // Simple JSON Comparison Function
-        function compareJSON(leftLines, rightLines) {
-            clearHighlights();
-            let maxLines = Math.max(leftLines.length, rightLines.length);
-            let errors = [];
-
-            for (let i = 0; i < maxLines; i++) {
-                const leftLine = leftLines[i] || '';
-                const rightLine = rightLines[i] || '';
-                if (leftLine !== rightLine) {
-                    errors.push({ line: i + 1, left: leftLine, right: rightLine });
-                    highlightError(editorLeft, i, leftLine.length);
-                    highlightError(editorRight, i, rightLine.length);
-                }
-            }
-            renderErrors(errors);
-        }
-
-        function clearHighlights() {
-            editorLeft.getAllMarks().forEach(mark => mark.clear());
-            editorRight.getAllMarks().forEach(mark => mark.clear());
-        }
-
-        function highlightError(editor, line, length) {
-            editor.markText({ line, ch: 0 }, { line, ch: length }, { className: 'errorHighlight' });
-        }
-
-        function renderErrors(errors) {
-            const errorList = document.getElementById('errorList');
-            const errorsContainer = document.getElementById('errors');
-            errorsContainer.innerHTML = '';
-            
-            if (errors.length > 0) {
-                errorList.style.display = 'block';
-                errors.forEach(error => {
-                    const errorItem = document.createElement('div');
-                    errorItem.className = 'diff-item';
-                    errorItem.textContent = `Line ${error.line}: Click to View`;
-                    errorItem.onclick = () => scrollToLine(error.line);
-                    errorsContainer.appendChild(errorItem);
-                });
-            } else {
-                // errorList.style.display = 'none';
-                errorsContainer.innerHTML = `<p style="color: lightgreen;">No differences found.</p>`;
-            }
-        }
-
-        // scroll to line
-        function scrollToLine(line) {
-            editorLeft.scrollIntoView({ line, ch: 0 });
-            editorRight.scrollIntoView({ line, ch: 0 });
-        }
-        // format options
-        function handleFormat(editor, action,blnOwn=false) {
-            try {
-                let content = editor.getValue();
-                let parsed = JSON.parse(content);
-                editor.setValue(action === 'format' ? JSON.stringify(parsed, null, 2) : JSON.stringify(parsed));
-            } catch (error) {
-                if(blnOwn) alert(error.message, "Invalid JSON");
-            }
-        }
-    </script>
+    <script>const commonConfig={lineNumbers:!0,mode:{name:'javascript',json:!0},theme:'material-darker',matchBrackets:!0,autoCloseBrackets:!0,foldGutter:!0,gutters:["CodeMirror-linenumbers","CodeMirror-foldgutter"]};const editorLeft=CodeMirror.fromTextArea(document.getElementById('editorLeft'),commonConfig);const editorRight=CodeMirror.fromTextArea(document.getElementById('editorRight'),commonConfig);const defaultLeftJSON={project:"JSON Diff Tool",features:["Auto Detect","Collapsible JSON"]};const defaultRightJSON={project:"JSON Diff Tool",features:["Auto Detect","Collapsible JSON"]};editorLeft.setValue(JSON.stringify(defaultLeftJSON,null,2));editorRight.setValue(JSON.stringify(defaultRightJSON,null,2));editorLeft.refresh();editorRight.refresh();function swapJSON(){const value1=editorLeft.getValue();const value2=editorRight.getValue();editorLeft.setValue(value2);editorRight.setValue(value1)};function clearEditor(editorInstance,blnAll=!1){if(blnAll){editorLeft.setValue('');editorRight.setValue('');clearHighlights()}else{editorInstance.setValue('')}
+        document.getElementById('diffList').innerHTML=''}
+        function copyText(editorInstance,button){let text=editorInstance.getValue();text=text.replace(/[\u200B-\u200D\uFEFF]/g,'');navigator.clipboard.writeText(text).then(()=>{button.textContent="Copied!";setTimeout(()=>button.textContent="Copy",1500)}).catch(err=>{console.error("Failed to copy:",err)})}
+        function toggleFullScreen(editorId){var element=document.getElementById(editorId);element.classList.toggle("fullscreen")}
+        function compareJSONFunction(){document.getElementById("errors").innerHTML="";let leftJSON,rightJSON,leftLines,rightLines;try{handleFormat(editorLeft,'format')
+        handleFormat(editorRight,'format')
+        leftLines=editorLeft.getValue().split("\n");rightLines=editorRight.getValue().split("\n");leftJSON=JSON.parse(editorLeft.getValue())}catch(e){let editorName="Left Editor";const match=e.message.match(/line (\d+)/);const line=match?`Line: ${match[1]}`:"Unknown line";document.getElementById("errors").innerHTML+=`<p style="color: red;">${editorName} - ${line} - ${e.message.split(':')[0]}</p>`;return}
+        try{rightJSON=JSON.parse(editorRight.getValue())}catch(e){let editorName="Right Editor";const match=e.message.match(/line (\d+)/);const line=match?`Line: ${match[1]}`:"Unknown line";document.getElementById("errors").innerHTML+=`<p style="color: red;">${editorName} - ${line} - ${e.message.split(':')[0]}</p>`;return}
+        compareJSON(leftLines,rightLines)};function compareJSON(leftLines,rightLines){clearHighlights();let maxLines=Math.max(leftLines.length,rightLines.length);let errors=[];for(let i=0;i<maxLines;i++){const leftLine=leftLines[i]||'';const rightLine=rightLines[i]||'';if(leftLine!==rightLine){errors.push({line:i+1,left:leftLine,right:rightLine});highlightError(editorLeft,i,leftLine.length);highlightError(editorRight,i,rightLine.length)}}
+        renderErrors(errors)}
+        function clearHighlights(){editorLeft.getAllMarks().forEach(mark=>mark.clear());editorRight.getAllMarks().forEach(mark=>mark.clear())}
+        function highlightError(editor,line,length){editor.markText({line,ch:0},{line,ch:length},{className:'errorHighlight'})}
+        function renderErrors(errors){const errorList=document.getElementById('errorList');const errorsContainer=document.getElementById('errors');errorsContainer.innerHTML='';if(errors.length>0){errorList.style.display='block';errors.forEach(error=>{const errorItem=document.createElement('div');errorItem.className='diff-item';errorItem.textContent=`Line ${error.line}: Click to View`;errorItem.onclick=()=>scrollToLine(error.line);errorsContainer.appendChild(errorItem)})}else{errorsContainer.innerHTML=`<p style="color: lightgreen;">No differences found.</p>`}}
+        function scrollToLine(line){editorLeft.scrollIntoView({line,ch:0});editorRight.scrollIntoView({line,ch:0})}
+        function handleFormat(editor,action,blnOwn=!1){try{let content=editor.getValue();let parsed=JSON.parse(content);editor.setValue(action==='format'?JSON.stringify(parsed,null,2):JSON.stringify(parsed))}catch(error){if(blnOwn)alert(error.message,"Invalid JSON");}}</script>
 </body>
 </html>
