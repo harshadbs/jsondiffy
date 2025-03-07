@@ -1,118 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="JSONDiffy - Compare JSON Data Instantly">
-    <meta property="og:description" content="Quickly compare and analyze JSON data with JSONDiffy. Find differences, visualize changes, and debug structured data with ease.">
-    <meta property="og:url" content="https://www.jsondiffy.com/">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="JSONDiffy - Compare JSON Data Instantly">
-    <meta name="twitter:description" content="JSONDiffy makes JSON comparison seamless. Detect differences, format data, and debug efficiently.">
-
-    <title>JSONDiffy - Advanced JSON Comparison Tool</title>
-    <meta name="description" content="Compare JSON data easily with JSONDiffy. Instantly detect differences, format, and analyze structured data with a user-friendly interface. Try it now!">   
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/codemirror.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/theme/material-darker.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/addon/fold/foldgutter.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/codemirror.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/mode/javascript/javascript.min.js"></script>
-
-    <!-- Folding Add-ons -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/addon/fold/foldcode.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/addon/fold/foldgutter.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/addon/fold/brace-fold.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/addon/fold/comment-fold.min.js"></script>
-    <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "SoftwareApplication",
-          "name": "JSONDiffy",
-          "url": "https://www.jsondiffy.com",
-          "description": "Easily compare JSON files and detect differences. JSONDiffy provides an accurate and efficient JSON comparison tool for developers.",
-          "applicationCategory": "DeveloperTool",
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-          }
+    <meta charset=UTF-8><meta content="width=device-width,initial-scale=1"name=viewport><meta content="JSONDiffy - Compare JSON Data Instantly"property=og:title><meta content="Quickly compare and analyze JSON data with JSONDiffy. Find differences, visualize changes, and debug structured data with ease."property=og:description><meta content=https://www.jsondiffy.com/ property=og:url><meta content=summary_large_image name=twitter:card><meta content="JSONDiffy - Compare JSON Data Instantly"name=twitter:title><meta content="JSONDiffy makes JSON comparison seamless. Detect differences, format data, and debug efficiently."name=twitter:description><title>JSONDiffy - Advanced JSON Comparison Tool</title><meta content="Compare JSON data easily with JSONDiffy. Instantly detect differences, format, and analyze structured data with a user-friendly interface. Try it now!"name=description><link href=https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/codemirror.min.css rel=stylesheet><link href=https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/theme/material-darker.min.css rel=stylesheet><link href=https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/addon/fold/foldgutter.min.css rel=stylesheet><script src=https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/codemirror.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/mode/javascript/javascript.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/addon/fold/foldcode.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/addon/fold/foldgutter.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/addon/fold/brace-fold.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/addon/fold/comment-fold.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/addon/edit/closebrackets.min.js></script><script type=application/ld+json>{
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "JSONDiffy",
+        "url": "https://www.jsondiffy.com",
+        "description": "Easily compare JSON files and detect differences. JSONDiffy provides an accurate and efficient JSON comparison tool for developers.",
+        "applicationCategory": "DeveloperTool",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
         }
-        </script>
-        
-        <style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;background-color:#282c34;color:#e8e8e8}.body-container{display:flex;gap:10px;justify-content:center;padding:20px}.editor-container{width:45%;height:640px;border:1px solid #444;position:relative}.CodeMirror{height:100%;font-size:15px}.header{display:flex;justify-content:space-between;align-items:center;background:#444;padding:10px;border-radius:6px}.header span{font-size:16px;font-weight:700;color:#fff}.header select,.header button{padding:8px 12px;border:none;font-size:14px;border-radius:5px;cursor:pointer;transition:0.3s ease}.header select{background:#333;color:#fff}.header button{background:#0056b3;color:#fff}.header button:hover{background:#0056b3}.diff-actions{display:flex;flex-direction:column;gap:1rem;justify-content:center}.diff-actions button{padding:10px 20px;background-color:#0056b3;border:none;color:#fff;font-size:16px;cursor:pointer;border-radius:5px}.fullscreen{position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;background:#000}.errorHighlight{background-color:rgb(255 0 0 / .3)}.mainHeader{display:flex;justify-content:space-between;align-items:center;margin-top:15px;margin-bottom:40px;padding:10px 0;border-bottom:1px solid #ddd}.logo{font-size:24px;font-weight:700;color:#c5c8cc}</style>
+      }</script><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;background-color:#282c34;color:#e8e8e8}.body-container{display:flex;gap:10px;justify-content:center;padding:20px}.editor-container{width:45%;height:640px;border:1px solid #444;position:relative}.CodeMirror{height:100%;font-size:15px}.header{display:flex;justify-content:space-between;align-items:center;background:#444;padding:10px;border-radius:6px}.header span{font-size:16px;font-weight:700;color:#fff}.header button,.header select{padding:8px 12px;border:none;font-size:14px;border-radius:5px;cursor:pointer;transition:.3s ease}.header select{background:#333;color:#fff}.header button{background:#0056b3;color:#fff}.header button:hover{background:#0056b3}.diff-actions{display:flex;flex-direction:column;gap:1rem;justify-content:center}.diff-actions button{padding:10px 20px;background-color:#0056b3;border:none;color:#fff;font-size:16px;cursor:pointer;border-radius:5px}.fullscreen{position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;background:#000}.errorHighlight{background-color:rgb(255 0 0 / .3)}.mainHeader{display:flex;justify-content:space-between;align-items:center;margin-top:15px;margin-bottom:40px;padding:10px 0;border-bottom:1px solid #ddd}.logo{font-size:24px;font-weight:700;color:#c5c8cc}</style>
 </head>
 <body>
-
-    <header class="mainHeader">
-        <div class="logo-section">
-            <h1 class="logo">JSONDiffy - The Best JSON Comparison Tool</h1>
-            <br>
-        </div>
-    </header>
-    <div class="body-container">        
-        <!-- Left Editor -->
-        <div class="editor-container" id="leftEditorSection">
-            <div class="header">
-                <span>Left Editor</span>
-                <div>
-                    <select onclick="handleFormat(editorLeft, this.value,blnOwn=true)">
-                        <option value="format">Format JSON</option>
-                        <option value="minify">Minify JSON</option>
-                    </select>
-                    <button id="cleareditor1" onclick="clearEditor(editorLeft)">Cleare</button>
-                    <!-- <button onclick="copyText(editorLeft)">Copy</button> -->
-                    <button onclick="copyText(editorLeft, this)">Copy</button>
-                    <button onclick="toggleFullScreen('leftEditorSection')">Fullscreen</button>
-                </div>
-            </div>
-            <textarea id="editorLeft"></textarea>
-        </div>
-
-        <!-- Compare Button -->
-        <div class="diff-actions">
-            <button onclick="compareJSONFunction()" id="compareBtn">Compare</button>
-            <button onclick="swapJSON()">Swap</button>
-        </div>
-
-        <!-- Right Editor -->
-        <div class="editor-container" id="rightEditorSection">
-            <div class="header">
-                <span>Right Editor</span>
-                <div>
-                    <select onclick="handleFormat(editorRight, this.value,blnOwn=true)">
-                        <option value="format">Format JSON</option>
-                        <option value="minify">Minify JSON</option>
-                    </select>
-                    <button id="cleareditor1" onclick="clearEditor(editorRight)">Cleare</button>
-                    <!-- <button onclick="copyText(editorRight)">Copy</button> -->
-                    <button onclick="copyText(editorRight, this)">Copy</button>
-                    <button onclick="toggleFullScreen('rightEditorSection')">Fullscreen</button>
-                </div>
-            </div>
-            <textarea id="editorRight"></textarea>
-        </div>
-
-        <div class="differences-panel" id="errorList">
-            <h3 style="margin-bottom: 15px; color: #e8e8e8;">Differences</h3>
-            <div id="errors"></div>
-        </div>
-    </div>
-
-
-    <script>const commonConfig={lineNumbers:!0,mode:{name:'javascript',json:!0},theme:'material-darker',matchBrackets:!0,autoCloseBrackets:!0,foldGutter:!0,gutters:["CodeMirror-linenumbers","CodeMirror-foldgutter"]};const editorLeft=CodeMirror.fromTextArea(document.getElementById('editorLeft'),commonConfig);const editorRight=CodeMirror.fromTextArea(document.getElementById('editorRight'),commonConfig);const defaultLeftJSON={project:"JSON Diff Tool",features:["Auto Detect","Collapsible JSON"]};const defaultRightJSON={project:"JSON Diff Tool",features:["Auto Detect","Collapsible JSON"]};editorLeft.setValue(JSON.stringify(defaultLeftJSON,null,2));editorRight.setValue(JSON.stringify(defaultRightJSON,null,2));editorLeft.refresh();editorRight.refresh();function swapJSON(){const value1=editorLeft.getValue();const value2=editorRight.getValue();editorLeft.setValue(value2);editorRight.setValue(value1)};function clearEditor(editorInstance,blnAll=!1){if(blnAll){editorLeft.setValue('');editorRight.setValue('');clearHighlights()}else{editorInstance.setValue('')}
-        document.getElementById('diffList').innerHTML=''}
-        function copyText(editorInstance,button){let text=editorInstance.getValue();text=text.replace(/[\u200B-\u200D\uFEFF]/g,'');navigator.clipboard.writeText(text).then(()=>{button.textContent="Copied!";setTimeout(()=>button.textContent="Copy",1500)}).catch(err=>{console.error("Failed to copy:",err)})}
-        function toggleFullScreen(editorId){var element=document.getElementById(editorId);element.classList.toggle("fullscreen")}
-        function compareJSONFunction(){document.getElementById("errors").innerHTML="";let leftJSON,rightJSON,leftLines,rightLines;try{handleFormat(editorLeft,'format')
-        handleFormat(editorRight,'format')
-        leftLines=editorLeft.getValue().split("\n");rightLines=editorRight.getValue().split("\n");leftJSON=JSON.parse(editorLeft.getValue())}catch(e){let editorName="Left Editor";const match=e.message.match(/line (\d+)/);const line=match?`Line: ${match[1]}`:"Unknown line";document.getElementById("errors").innerHTML+=`<p style="color: red;">${editorName} - ${line} - ${e.message.split(':')[0]}</p>`;return}
-        try{rightJSON=JSON.parse(editorRight.getValue())}catch(e){let editorName="Right Editor";const match=e.message.match(/line (\d+)/);const line=match?`Line: ${match[1]}`:"Unknown line";document.getElementById("errors").innerHTML+=`<p style="color: red;">${editorName} - ${line} - ${e.message.split(':')[0]}</p>`;return}
-        compareJSON(leftLines,rightLines)};function compareJSON(leftLines,rightLines){clearHighlights();let maxLines=Math.max(leftLines.length,rightLines.length);let errors=[];for(let i=0;i<maxLines;i++){const leftLine=leftLines[i]||'';const rightLine=rightLines[i]||'';if(leftLine!==rightLine){errors.push({line:i+1,left:leftLine,right:rightLine});highlightError(editorLeft,i,leftLine.length);highlightError(editorRight,i,rightLine.length)}}
-        renderErrors(errors)}
-        function clearHighlights(){editorLeft.getAllMarks().forEach(mark=>mark.clear());editorRight.getAllMarks().forEach(mark=>mark.clear())}
-        function highlightError(editor,line,length){editor.markText({line,ch:0},{line,ch:length},{className:'errorHighlight'})}
-        function renderErrors(errors){const errorList=document.getElementById('errorList');const errorsContainer=document.getElementById('errors');errorsContainer.innerHTML='';if(errors.length>0){errorList.style.display='block';errors.forEach(error=>{const errorItem=document.createElement('div');errorItem.className='diff-item';errorItem.textContent=`Line ${error.line}: Click to View`;errorItem.onclick=()=>scrollToLine(error.line);errorsContainer.appendChild(errorItem)})}else{errorsContainer.innerHTML=`<p style="color: lightgreen;">No differences found.</p>`}}
-        function scrollToLine(line){editorLeft.scrollIntoView({line,ch:0});editorRight.scrollIntoView({line,ch:0})}
-        function handleFormat(editor,action,blnOwn=!1){try{let content=editor.getValue();let parsed=JSON.parse(content);editor.setValue(action==='format'?JSON.stringify(parsed,null,2):JSON.stringify(parsed))}catch(error){if(blnOwn)alert(error.message,"Invalid JSON");}}</script>
+    <header class=mainHeader><div class=logo-section><h1 class=logo>JSONDiffy - The Best JSON Comparison Tool</h1><br></div></header><div class=body-container><div class=editor-container id=leftEditorSection><div class=header><span>Left Editor</span><div><select onclick="handleFormat(editorLeft,this.value,blnOwn=!0)"><option value=format>Format JSON<option value=minify>Minify JSON</select> <button onclick=clearEditor(editorLeft) id=cleareditor1>Cleare</button> <button onclick=copyText(editorLeft,this)>Copy</button> <button onclick='toggleFullScreen("leftEditorSection")'>Fullscreen</button></div></div><textarea id=editorLeft></textarea></div><div class=diff-actions><button onclick=compareJSONFunction() id=compareBtn>Compare</button> <button onclick=swapJSON()>Swap</button></div><div class=editor-container id=rightEditorSection><div class=header><span>Right Editor</span><div><select onclick="handleFormat(editorRight,this.value,blnOwn=!0)"><option value=format>Format JSON<option value=minify>Minify JSON</select> <button onclick=clearEditor(editorRight) id=cleareditor1>Cleare</button> <button onclick=copyText(editorRight,this)>Copy</button> <button onclick='toggleFullScreen("rightEditorSection")'>Fullscreen</button></div></div><textarea id=editorRight></textarea></div><div class=differences-panel id=errorList><h3 style=margin-bottom:15px;color:#e8e8e8>Differences</h3><div id=errors></div></div></div>
+    <script>
+    const commonConfig={lineNumbers:!0,mode:{name:"javascript",json:!0},theme:"material-darker",matchBrackets:!0,autoCloseBrackets:!0,foldGutter:!0,gutters:["CodeMirror-linenumbers","CodeMirror-foldgutter"]},editorLeft=CodeMirror.fromTextArea(document.getElementById("editorLeft"),commonConfig),editorRight=CodeMirror.fromTextArea(document.getElementById("editorRight"),commonConfig),defaultLeftJSON={project:"JSON Diff Tool",features:["Auto Detect","Collapsible JSON"]},defaultRightJSON={project:"JSON Diff Tool",features:["Auto Detect","Collapsible JSON"]};function swapJSON(){let e=editorLeft.getValue(),t=editorRight.getValue();editorLeft.setValue(t),editorRight.setValue(e)}function clearEditor(e,t=!1){t?(editorLeft.setValue(""),editorRight.setValue(""),clearHighlights()):e.setValue(""),document.getElementById("diffList").innerHTML=""}function copyText(e,t){let r=e.getValue();r=r.replace(/[\u200B-\u200D\uFEFF]/g,""),navigator.clipboard.writeText(r).then(()=>{t.textContent="Copied!",setTimeout(()=>t.textContent="Copy",1500)}).catch(e=>{console.error("Failed to copy:",e)})}function toggleFullScreen(e){document.getElementById(e).classList.toggle("fullscreen")}function compareJSONFunction(){document.getElementById("errors").innerHTML="";let e,t,r,i;try{handleFormat(editorLeft,"format"),handleFormat(editorRight,"format"),r=editorLeft.getValue().split("\n"),i=editorRight.getValue().split("\n"),e=JSON.parse(editorLeft.getValue())}catch(l){let o=l.message.match(/line (\d+)/),n=o?`Line: ${o[1]}`:"Unknown line";document.getElementById("errors").innerHTML+=`<p style="color: red;">Left Editor - ${n} - ${l.message.split(":")[0]}</p>`;return}try{t=JSON.parse(editorRight.getValue())}catch(a){let s=a.message.match(/line (\d+)/),g=s?`Line: ${s[1]}`:"Unknown line";document.getElementById("errors").innerHTML+=`<p style="color: red;">Right Editor - ${g} - ${a.message.split(":")[0]}</p>`;return}compareJSON(r,i)}function compareJSON(e,t){clearHighlights();let r=Math.max(e.length,t.length),i=[];for(let l=0;l<r;l++){let o=e[l]||"",n=t[l]||"";o!==n&&(i.push({line:l+1,left:o,right:n}),highlightError(editorLeft,l,o.length),highlightError(editorRight,l,n.length))}renderErrors(i)}function clearHighlights(){editorLeft.getAllMarks().forEach(e=>e.clear()),editorRight.getAllMarks().forEach(e=>e.clear())}function highlightError(e,t,r){e.markText({line:t,ch:0},{line:t,ch:r},{className:"errorHighlight"})}function renderErrors(e){let t=document.getElementById("errorList"),r=document.getElementById("errors");r.innerHTML="",e.length>0?(t.style.display="block",e.forEach(e=>{let t=document.createElement("div");t.className="diff-item",t.textContent=`Line ${e.line}: Click to View`,t.onclick=()=>scrollToLine(e.line),r.appendChild(t)})):r.innerHTML='<p style="color: lightgreen;">No differences found.</p>'}function scrollToLine(e){editorLeft.scrollIntoView({line:e,ch:0}),editorRight.scrollIntoView({line:e,ch:0})}function handleFormat(e,t,r=!1){try{let i=e.getValue(),l=JSON.parse(i);e.setValue("format"===t?JSON.stringify(l,null,2):JSON.stringify(l))}catch(o){r&&alert(o.message,"Invalid JSON")}}function handlePaste(e,t){let r=t.clipboardData.getData("text/plain");try{let i=r.replace(/(\w+):/g,'"$1":'),l=JSON.parse(i),o=JSON.stringify(l,null,2),n=e.getDoc(),a=n.getCursor();n.replaceRange(o,a),t.preventDefault()}catch(s){console.log("Not a valid JavaScript object, pasting as-is.")}}editorLeft.setValue(JSON.stringify(defaultLeftJSON,null,2)),editorRight.setValue(JSON.stringify(defaultRightJSON,null,2)),editorLeft.refresh(),editorRight.refresh(),editorLeft.on("paste",handlePaste),editorRight.on("paste",handlePaste);
+    </script>
 </body>
 </html>
