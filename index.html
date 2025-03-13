@@ -30,61 +30,21 @@
             <br />
         </div>
     </header>
-    <div class="body-container">
-        <div class="editor-container" id="leftEditorSection">
-            <div class="header">
-                <span>Left Editor</span>
-                <div>
-                    <select onchange="handleFormatPrint(editorLeft, this.value)">
-                        <option value="">Export Left JSON</option>
-                        <option value="print">Print JSON</option>
-                        <option value="object">Print Object</option>
-                        <option value="pdf">Print PDF</option>
-                        <option value="excel">Print Excel (XLSX)</option>
-                        <option value="csv">Print CSV</option>
-                        <option value="xml">Print XML</option>
-                    </select>
-                    <select onclick="handleFormat(editorLeft,this.value,blnOwn=!0)">
-                        <option value="format">Format JSON</option>
-                        <option value="minify">Minify JSON</option>
-                    </select>
-                    <button onclick="clearEditor(editorLeft)" id="cleareditor1">Clear</button> <button onclick="copyText(editorLeft,this)">Copy</button> <button onclick='toggleFullScreen("leftEditorSection")'>Fullscreen</button>
-                </div>
-            </div>
-            <textarea id="editorLeft"></textarea>
-            <div id="error1" class="error-message" onclick="goToError(editorLeft, error1Line)"></div>
-        </div>
-        <div class="diff-actions"><button onclick="compareJSONFunction()" id="compareBtn">Compare</button> <button onclick="swapJSON()">Swap</button> <button onclick="loadSampleJSON()">load</button></div>
-        <div class="editor-container" id="rightEditorSection">
-            <div class="header">
-                <span>Right Editor</span>
-                <div>
-                    <select onchange="handleFormatPrint(editorRight, this.value)">
-                        <option value="">Export Right JSON</option>
-                        <option value="print">Print JSON</option>
-                        <option value="object">Print Object</option>
-                        <option value="pdf">Print PDF</option>
-                        <option value="excel">Print Excel (XLSX)</option>
-                        <option value="csv">Print CSV</option>
-                        <option value="xml">Print XML</option>
-                    </select>
-                    <select onclick="handleFormat(editorRight,this.value,blnOwn=!0)">
-                        <option value="format">Format JSON</option>
-                        <option value="minify">Minify JSON</option>
-                    </select>
-                    <button onclick="clearEditor(editorRight)" id="cleareditor1">Clear</button> <button onclick="copyText(editorRight,this)">Copy</button> <button onclick='toggleFullScreen("rightEditorSection")'>Fullscreen</button>
-                </div>
-            </div>
-            <textarea id="editorRight"></textarea>
-            <div id="error2" class="error-message" onclick="goToError(editorRight, error2Line)"></div>
-        </div>
-        <div class="differences-panel" id="errorList">
-            <h3 style="margin-bottom: 15px; color: #e8e8e8;">Differences</h3>
-            <div id="errors"></div>
-        </div>
-    </div>
+   <div class=body-container><div class=editor-container id=leftEditorSection><div class=header><span>Left Editor</span><div><select onchange=handleFormatPrint(editorLeft,this.value)><option value="">Export Left JSON<option value=print>Print JSON<option value=object>Print Object<option value=pdf>Print PDF<option value=excel>Print Excel (XLSX)<option value=csv>Print CSV<option value=xml>Print XML</select> <select onclick="handleFormat(editorLeft,this.value,blnOwn=!0)"><option value=format>Format JSON<option value=minify>Minify JSON</select> <button onclick=clearEditor(editorLeft) id=cleareditor1>Clear</button> <button onclick=copyText(editorLeft,this)>Copy</button> <button onclick='toggleFullScreen("leftEditorSection")'>Fullscreen</button></div></div><textarea id=editorLeft></textarea><div class=error-message id=error1 onclick=goToError(editorLeft,error1Line)></div></div><div class=diff-actions><button onclick=compareJSONFunction() id=compareBtn>Compare</button> <button onclick=swapJSON()>Swap</button> <button onclick=loadSampleJSON()>load</button></div><div class=editor-container id=rightEditorSection><div class=header><span>Right Editor</span><div><select onchange=handleFormatPrint(editorRight,this.value)><option value="">Export Right JSON<option value=print>Print JSON<option value=object>Print Object<option value=pdf>Print PDF<option value=excel>Print Excel (XLSX)<option value=csv>Print CSV<option value=xml>Print XML</select> <select onclick="handleFormat(editorRight,this.value,blnOwn=!0)"><option value=format>Format JSON<option value=minify>Minify JSON</select> <button onclick=clearEditor(editorRight) id=cleareditor1>Clear</button> <button onclick=copyText(editorRight,this)>Copy</button> <button onclick='toggleFullScreen("rightEditorSection")'>Fullscreen</button></div></div><textarea id=editorRight></textarea><div class=error-message id=error2 onclick=goToError(editorRight,error2Line)></div></div><div class=differences-panel id=errorList><h3 style=margin-bottom:15px;color:#e8e8e8>Differences</h3><div id=errors></div></div></div>
     <!-- <script src="script.js"></script> -->
     <script>
+        document.addEventListener("contextmenu", (event) => event.preventDefault());
+        document.addEventListener("keydown", function (event) {
+        if (
+            event.key === "F12" ||
+            (event.ctrlKey && event.shiftKey && event.key === "I") ||
+            (event.ctrlKey && event.key === "U")
+        ) {
+            event.preventDefault();
+        }
+        });
+
+
         const{jsPDF:e}=window.jspdf;function checkEditorErrors(e,t){let r=document.getElementById(t),o=e.getValue();e.doc.clearGutter("error-markers"),e.getAllMarks().forEach(e=>e.clear());try{return JSON.parse(o),r.style.display="none",null}catch(n){let l=n.message,i=l.match(/line (\d+)/);if(i){let a=parseInt(i[1])-1;return e.doc.setGutterMarker(a,"error-markers",makeErrorMarker()),e.markText({line:a,ch:0},{line:a+1,ch:0},{className:"errorHighlight"}),l=`Parse error on line ${i[1]}:
 `+getErrorSnippet(o,a)+`
 Expecting ${extractExpectedTokens(l)}`,r.innerHTML=`<a href="#">${l}</a>`,r.style.display="block",a}}}function getErrorSnippet(e,t){let r=e.split("\n");return t>=0&&t<r.length?r[t]+"\n"+"-".repeat(r[t].length)+"^":"Unknown error location"}function extractExpectedTokens(e){let t=e.match(/Expecting (.*)/);return t?t[1]:"valid JSON syntax"}function makeErrorMarker(){let e=document.createElement("div");return e.style.color="red",e.innerHTML="●",e}function goToError(e,t){null!==t&&(e.scrollIntoView({line:t,ch:0},200),e.setCursor({line:t,ch:0}),e.focus())}const commonConfig={lineNumbers:!0,mode:{name:"javascript",json:!0},theme:"material-darker",matchBrackets:!0,autoCloseBrackets:!0,foldGutter:!0,gutters:["CodeMirror-linenumbers","CodeMirror-foldgutter"]},editorLeft=CodeMirror.fromTextArea(document.getElementById("editorLeft"),commonConfig),editorRight=CodeMirror.fromTextArea(document.getElementById("editorRight"),commonConfig);function saveToLocalStorage(){localStorage.setItem("editorLeftContent",editorLeft.getValue()),localStorage.setItem("editorRightContent",editorRight.getValue())}function loadFromLocalStorage(){let e=localStorage.getItem("editorLeftContent"),t=localStorage.getItem("editorRightContent");null!==e&&editorLeft.setValue(e),null!==t&&editorRight.setValue(t)}function loadSampleJSON(){let e=getRandomJSON(),t=getRandomJSON();editorLeft.setValue(JSON.stringify(e,null,2)),editorRight.setValue(JSON.stringify(t,null,2)),editorLeft.refresh(),editorRight.refresh()}function getRandomJSON(){return{project:"JSON Diff Tool",features:["Feature "+Math.floor(100*Math.random()),"Feature "+Math.floor(100*Math.random())],version:Math.random().toFixed(2),timestamp:new Date().toISOString()}}function swapJSON(){let e=editorLeft.getValue(),t=editorRight.getValue();editorLeft.setValue(t),editorRight.setValue(e)}function clearEditor(e,t=!1){t?(editorLeft.setValue(""),editorRight.setValue(""),clearHighlights()):e.setValue(""),document.getElementById("diffList").innerHTML=""}function copyText(e,t){let r=e.getValue();r=r.replace(/[\u200B-\u200D\uFEFF]/g,""),navigator.clipboard.writeText(r).then(()=>{t.textContent="Copied!",setTimeout(()=>t.textContent="Copy",1500)}).catch(e=>{console.error("Failed to copy:",e)})}function toggleFullScreen(e){document.getElementById(e).classList.toggle("fullscreen")}function compareJSONFunction(){if(document.getElementById("errors").innerHTML="",error1Line=checkEditorErrors(editorLeft,"error1"),error2Line=checkEditorErrors(editorRight,"error2"),error1Line||error2Line)return;let e,t,r,o;try{r=editorLeft.getValue().split("\n"),o=editorRight.getValue().split("\n"),e=JSON.parse(editorLeft.getValue())}catch(n){let l=n.message.match(/line (\d+)/),i=l?`Line: ${l[1]}`:"Unknown line";document.getElementById("errors").innerHTML+=`<p style="color: red;">Left Editor - ${i} - ${n.message.split(":")[0]}</p>`;return}try{t=JSON.parse(editorRight.getValue())}catch(a){let c=a.message.match(/line (\d+)/),s=c?`Line: ${c[1]}`:"Unknown line";document.getElementById("errors").innerHTML+=`<p style="color: red;">Right Editor - ${s} - ${a.message.split(":")[0]}</p>`;return}compareJSON(r,o)}function compareJSON(e,t){clearHighlights();let r=Math.max(e.length,t.length),o=[];for(let n=0;n<r;n++){let l=e[n]||"",i=t[n]||"";l!==i&&(o.push({line:n+1,left:l,right:i}),highlightError(editorLeft,n,l.length),highlightError(editorRight,n,i.length))}renderErrors(o)}function clearHighlights(){editorLeft.getAllMarks().forEach(e=>e.clear()),editorRight.getAllMarks().forEach(e=>e.clear())}function highlightError(e,t,r){e.markText({line:t,ch:0},{line:t,ch:r},{className:"errorHighlight"})}function renderErrors(e){let t=document.getElementById("errorList"),r=document.getElementById("errors");r.innerHTML="",e.length>0?(t.style.display="block",e.forEach(e=>{let t=document.createElement("div");t.className="diff-item",t.textContent=`Line ${e.line}: Click to View`,t.onclick=()=>scrollToLine(e.line),t.style.cursor="pointer",r.appendChild(t)})):r.innerHTML='<p style="color: lightgreen;">No differences</p>'}function scrollToLine(e){editorLeft.scrollIntoView({line:e,ch:0}),editorRight.scrollIntoView({line:e,ch:0})}function handleFormat(e,t,r=!1){try{let o=e.getValue(),n=JSON.parse(o);e.setValue("format"===t?JSON.stringify(n,null,2):JSON.stringify(n))}catch(l){r&&alert(l.message,"Invalid JSON")}}function handleFormatPrint(e,t){let r;try{r=JSON.parse(e.getValue())}catch(o){alert("Invalid JSON");return}switch(t){case"csv":exportToCSV(r);break;case"excel":exportToExcel(r);break;case"pdf":exportToPDF(r);break;case"xml":exportToXML(r);case"object":exportToObject(r);break;case"print":printJSON(r);break;default:console.warn("No valid export format selected.")}}function exportToObject(e){let t=`const jsonObject = ${JSON.stringify(e,null,2)};`;downloadFile(t,"data.js","application/javascript")}function exportToCSV(e){let t=Array.isArray(e)?e:[e],r=Object.keys(t[0]),o=[r.join(","),...t.map(e=>r.map(t=>`"${e[t]||""}"`).join(","))].join("\n");downloadFile(o,"data.csv","text/csv")}function exportToExcel(e){let t=XLSX.utils.json_to_sheet(Array.isArray(e)?e:[e]),r=XLSX.utils.book_new();XLSX.utils.book_append_sheet(r,t,"Sheet1"),XLSX.writeFile(r,"data.xlsx")}function exportToPDF(t){let r=new e,o=JSON.stringify(t,null,2);r.text(o,10,10),r.save("data.pdf")}function exportToXML(e){let t="<root>\n";!function e(r,o="  "){for(let n in r){let l=n.replace(/^[0-9]/,"_");l=l.replace(/\s+/g,"_"),"object"==typeof r[n]&&null!==r[n]?(t+=`${o}<${l}>
